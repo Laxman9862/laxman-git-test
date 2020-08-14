@@ -7,6 +7,11 @@ const cors = require('cors');
 
 
 const userRouter = require('./routers/user');
+const foodRouter = require('./routers/food');
+const category = require('./routers/foodcategory');
+const resturant = require('./routers/resturant');
+const upload = require('./routers/upload');
+const cart = require('./routers/cart');
 
 
 const auth = require('./Auth');
@@ -14,13 +19,14 @@ const auth = require('./Auth');
 const app = express();
 app.use(morgan('tiny'));
 
+
 mongoose.connect(process.env.DbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 }).then(() => {
     console.log('Connected to database server');
-});
+}).catch(e => console.log(e));
 
 app.use(cors('*'));
 app.use(express.json());
@@ -32,6 +38,11 @@ app.get('/', (req, res, next) => {
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/upload', upload);
+app.use('/api/food', foodRouter);
+app.use('/api/category', category);
+app.use('/api/resturant', resturant);
+app.use('/api/cart', cart);
 
 
 app.use((req, res, next) => {

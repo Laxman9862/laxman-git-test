@@ -13,8 +13,8 @@ const foodSchema = new mongoose.Schema({
     },
     category:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Foodcategory',
-        required:true
+        ref:'Foodcategory'
+       
     }],
    
 },{timestamps:true});
