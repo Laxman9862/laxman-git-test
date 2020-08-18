@@ -17,7 +17,9 @@ const cart = require('./routers/cart');
 const auth = require('./Auth');
 
 const app = express();
-app.use(morgan('tiny'));
+app.options('*', cors());
+  app.use(cors());
+  app.use(morgan('tiny'));
 
 
 mongoose.connect(process.env.DbURL, {
